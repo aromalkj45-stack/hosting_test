@@ -5,8 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Login</title>
 
@@ -19,90 +18,83 @@
         }
 
         body {
-
             font-family: Arial, sans-serif;
-
             min-height: 100vh;
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             background: #f2f4f7;
         }
 
         .login-container {
-
             width: 400px;
+            max-width: 90%;
 
-            background: white;
+            background: #ffffff;
 
             padding: 40px;
 
             border-radius: 12px;
 
             box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.1);
+                0 10px 30px rgba(0, 0, 0, 0.10);
         }
 
         .login-container h1 {
-
             text-align: center;
 
             margin-bottom: 10px;
 
-            color: #222;
+            color: #222222;
         }
 
-        .login-container p.subtitle {
-
+        .subtitle {
             text-align: center;
 
-            color: #777;
+            color: #777777;
 
             margin-bottom: 30px;
         }
 
         .form-group {
-
             margin-bottom: 20px;
         }
 
         .form-group label {
-
             display: block;
 
             margin-bottom: 8px;
 
             font-weight: bold;
 
-            color: #333;
+            color: #333333;
         }
 
         .form-group input {
-
             width: 100%;
 
             padding: 13px;
 
-            border: 1px solid #ccc;
+            border: 1px solid #cccccc;
 
             border-radius: 7px;
 
             font-size: 15px;
 
             outline: none;
+
+            transition: border-color 0.2s;
         }
 
         .form-group input:focus {
-
             border-color: #007bff;
+
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.10);
         }
 
         .login-button {
-
             width: 100%;
 
             padding: 13px;
@@ -113,31 +105,34 @@
 
             background: #007bff;
 
-            color: white;
+            color: #ffffff;
 
             font-size: 16px;
 
             font-weight: bold;
 
             cursor: pointer;
+
+            transition: background 0.2s;
         }
 
         .login-button:hover {
-
             background: #0056b3;
         }
 
-        .register-link {
+        .login-button:active {
+            transform: translateY(1px);
+        }
 
+        .register-link {
             text-align: center;
 
             margin-top: 25px;
 
-            color: #666;
+            color: #666666;
         }
 
         .register-link a {
-
             color: #007bff;
 
             text-decoration: none;
@@ -146,12 +141,10 @@
         }
 
         .register-link a:hover {
-
             text-decoration: underline;
         }
 
         .message {
-
             padding: 12px;
 
             margin-bottom: 20px;
@@ -159,20 +152,32 @@
             border-radius: 6px;
 
             text-align: center;
+
+            font-size: 14px;
         }
 
         .success {
-
             background: #d4edda;
 
             color: #155724;
         }
 
         .error {
-
             background: #f8d7da;
 
             color: #721c24;
+        }
+
+        .warning {
+            background: #fff3cd;
+
+            color: #856404;
+        }
+
+        .info {
+            background: #d1ecf1;
+
+            color: #0c5460;
         }
 
     </style>
@@ -192,7 +197,9 @@
     </p>
 
 
-    <!-- Flask Messages -->
+    <!-- =============================== -->
+    <!-- Flask Flash Messages             -->
+    <!-- =============================== -->
 
     {% with messages = get_flashed_messages(with_categories=true) %}
 
@@ -201,9 +208,7 @@
             {% for category, message in messages %}
 
                 <div class="message {{ category }}">
-
                     {{ message }}
-
                 </div>
 
             {% endfor %}
@@ -213,11 +218,13 @@
     {% endwith %}
 
 
-    <!-- Login Form -->
+    <!-- =============================== -->
+    <!-- Login Form                       -->
+    <!-- =============================== -->
 
-    <form method="POST"
-          action="{{ url_for('login') }}">
+    <form method="POST" action="{{ url_for('login') }}">
 
+        <!-- Username -->
 
         <div class="form-group">
 
@@ -230,11 +237,14 @@
                 id="username"
                 name="username"
                 placeholder="Enter your username"
+                autocomplete="username"
                 required
             >
 
         </div>
 
+
+        <!-- Password -->
 
         <div class="form-group">
 
@@ -247,11 +257,14 @@
                 id="password"
                 name="password"
                 placeholder="Enter your password"
+                autocomplete="current-password"
                 required
             >
 
         </div>
 
+
+        <!-- Login Button -->
 
         <button
             type="submit"
@@ -261,9 +274,12 @@
 
         </button>
 
-
     </form>
 
+
+    <!-- =============================== -->
+    <!-- Registration Link                -->
+    <!-- =============================== -->
 
     <div class="register-link">
 
